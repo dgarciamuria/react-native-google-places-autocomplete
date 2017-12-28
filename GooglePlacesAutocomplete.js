@@ -108,6 +108,12 @@ export default class GooglePlacesAutocomplete extends Component {
           isCurrentLocation: true,
         });
       }
+      if (this.props.showEmptyResults === true) {
+        res.unshift({
+          description: this.props.emptyResultsLabel || 'No matching results were found',
+          isEmptyResultItem: true,
+        });
+      }
     }
 
     res = res.map(place => ({
@@ -299,6 +305,8 @@ export default class GooglePlacesAutocomplete extends Component {
       this.triggerBlur(); // hide keyboard but not the results
       delete rowData.isLoading;
       this.getCurrentLocation();
+
+    } else if (rowData.isEmptyResultItem){
 
     } else {
       this.setState({
@@ -743,7 +751,9 @@ GooglePlacesAutocomplete.propTypes = {
   debounce: PropTypes.number,
   isRowScrollable: PropTypes.bool,
   text: PropTypes.string,
-  textInputHide: PropTypes.bool
+  textInputHide: PropTypes.bool,
+  showEmptyResults: PropTypes.bool,
+  emptyResultsLabel: PropTypes.string
 }
 GooglePlacesAutocomplete.defaultProps = {
   placeholder: 'Search',
@@ -785,7 +795,8 @@ GooglePlacesAutocomplete.defaultProps = {
   enableEmptySections: true,
   listViewDisplayed: 'auto',
   debounce: 0,
-  textInputHide: false
+  textInputHide: false,
+  showEmptyResults: false
 }
 
 // this function is still present in the library to be retrocompatible with version < 1.1.0
