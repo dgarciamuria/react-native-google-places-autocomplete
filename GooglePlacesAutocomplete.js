@@ -108,7 +108,7 @@ export default class GooglePlacesAutocomplete extends Component {
           isCurrentLocation: true,
         });
       }
-      if (this.props.showEmptyResults === true) {
+      if (this.props.showEmptyResults === true && this.state.text && this.state.text.length) {
         res.unshift({
           description: this.props.emptyResultsLabel || 'No matching results were found',
           isEmptyResultItem: true,
