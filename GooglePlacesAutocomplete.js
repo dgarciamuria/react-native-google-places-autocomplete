@@ -178,12 +178,6 @@ export default class GooglePlacesAutocomplete extends Component {
   }
 
   getCurrentLocation = () => {
-    let options = {
-      enableHighAccuracy: false,
-      timeout: 20000,
-      maximumAge: 1000
-    };
-
     if (this.props.enableHighAccuracyLocation && Platform.OS === 'android') {
       options = {
         enableHighAccuracy: true,
@@ -213,8 +207,7 @@ export default class GooglePlacesAutocomplete extends Component {
       (error) => {
         this._disableRowLoaders();
         alert(error.message);
-      },
-      options
+      }
     );
   }
 
